@@ -121,15 +121,31 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="BD\BaseDatos.cs" />
+    <Compile Include="Controllers\UserController.cs" />
+    <Compile Include="Controllers\CanchaController.cs" />
+    <Compile Include="Controllers\TeacherController.cs" />
+    <Compile Include="Controllers\BookingController.cs" />
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
+    <Compile Include="DAO\BookingDao.cs" />
+    <Compile Include="DAO\TeacherDao.cs" />
+    <Compile Include="DAO\CanchaDao.cs" />
+    <Compile Include="DAO\UserDao.cs" />
     <Compile Include="DAO\AdminDao.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Interfaces\IBooking.cs" />
+    <Compile Include="Interfaces\ITeacher.cs" />
+    <Compile Include="Interfaces\ICancha.cs" />
+    <Compile Include="Interfaces\IUser.cs" />
     <Compile Include="Interfaces\IAdmin.cs" />
     <Compile Include="Interfaces\ICRUD.cs" />
+    <Compile Include="Models\Booking.cs" />
+    <Compile Include="Models\Teacher.cs" />
+    <Compile Include="Models\Cancha.cs" />
+    <Compile Include="Models\User.cs" />
     <Compile Include="Models\Admin.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -174,6 +190,10 @@
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Admin\Index.cshtml" />
+    <Content Include="Views\User\Index.cshtml" />
+    <Content Include="Views\Booking\Index.cshtml" />
+    <Content Include="Views\Teacher\Index.cshtml" />
+    <Content Include="Views\Cancha\Index.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
