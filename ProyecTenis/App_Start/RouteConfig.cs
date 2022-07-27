@@ -34,12 +34,6 @@ namespace ProyecTenis
             );
 
             routes.MapRoute(
-                name: "Booking",
-                url: "{controller}/{action}",
-                defaults: new { controller = "Booking", action = "Index"}
-            );
-
-            routes.MapRoute(
                 name: "Cancha",
                 url: "{controller}/{action}",
                 defaults: new { controller = "Cancha", action = "Index"}
@@ -51,6 +45,31 @@ namespace ProyecTenis
                 url: "{controller}/{action}",
                 defaults: new { controller = "Teacher", action = "Index"}
             );
+
+            
+
+            // RUTAS DE BOOKING
+            routes.MapRoute(
+                name: "Booking",
+                url: "{controller}/{action}/{idBoking}",
+                 new { controller = "Booking", action = "Edit", idBoking = -1  }
+                 
+
+            );
+            
+            routes.MapRoute(
+                "BookingCreate",
+                "{controller}/{action}",
+                new { controller = "Booking", action = "Create" }
+            );
+
+            routes.MapRoute(
+                name: "Booking/{id}",
+                url: "{controller}/{action}",
+                new { controller = "Booking", action = "Delete", idBooking = UrlParameter.Optional }
+            );
+            // RUTA DE ERRORES ERROR
+
 
         }
     }

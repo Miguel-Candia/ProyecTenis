@@ -11,17 +11,17 @@ namespace ProyecTenis.Models
         public string Name { get; set; }
         public string LastName { get; set; }
         public string Rut { get; set; }
-        public string UserName { get; set; }
-        public string Password { get; set; }
+        public string Phone { get; set; }
+        public string Email { get; set; }
 
-        public User(int id,string name, string lastname, string rut, string username, string password)
+        public User(int id,string name, string lastname, string rut, string phone, string email)
         {
             Id = id;
             Name = name;
             LastName = lastname;
             Rut = rut;
-            UserName = username;
-            Password = password;
+            Phone = phone;
+            Email = email;
         }
 
         public User() { }

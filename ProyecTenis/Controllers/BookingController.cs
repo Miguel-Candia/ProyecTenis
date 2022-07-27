@@ -18,7 +18,7 @@ namespace ProyecTenis.Controllers
         }
 
         // GET: Admin/Details/5
-        public ActionResult Details(int id)
+        public ActionResult Details()
         {
             return View();
         }
@@ -45,14 +45,14 @@ namespace ProyecTenis.Controllers
         }
 
         // GET: Admin/Edit/5
-        public ActionResult Edit(int id)
+        public ActionResult Edit()
         {
             return View();
         }
 
         // POST: Admin/Edit/5
         [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        public ActionResult Edit( FormCollection collection)
         {
             try
             {
@@ -67,14 +67,14 @@ namespace ProyecTenis.Controllers
         }
 
         // GET: Admin/Delete/5
-        public ActionResult Delete(int id)
+        public ActionResult Delete()
         {
             return View();
         }
 
         // POST: Admin/Delete/5
         [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
+        public ActionResult Delete( FormCollection collection)
         {
             try
             {
@@ -87,5 +87,10 @@ namespace ProyecTenis.Controllers
                 return View();
             }
         }
+
+        public ActionResult Update() {
+            return View();
+        }
+
     }
 }

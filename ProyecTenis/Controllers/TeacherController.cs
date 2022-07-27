@@ -20,7 +20,7 @@ namespace ProyecTenis.Controllers
         // GET: Admin/Details/5
         public ActionResult Details(int id)
         {
-            return View();
+            return View((new TeacherDao()).BuscarById(id));
         }
 
         // GET: Admin/Create
@@ -34,9 +34,13 @@ namespace ProyecTenis.Controllers
         {
             try
             {
-                // TODO: Add insert logic here
+           /*     using (Teacher teacher = new Teacher())
+                {
 
-                return RedirectToAction("Index");
+                }*/
+                    // TODO: Add insert logic here
+
+                    return RedirectToAction("Index");
             }
             catch
             {

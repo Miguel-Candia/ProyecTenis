@@ -1,4 +1,5 @@
 ﻿using ProyecTenis.DAO;
+using ProyecTenis.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,9 +18,9 @@ namespace ProyecTenis.Controllers
             return View(userDao.GetAll());
         }
 
+
         // GET: Admin/Details/5
-        public ActionResult Details(int id)
-        {
+        public ActionResult Details(int id) {
             return View();
         }
 
@@ -30,16 +31,27 @@ namespace ProyecTenis.Controllers
 
         // POST: Admin/Create
         [HttpPost]
-        public ActionResult Create(FormCollection collection)
-        {
-            try
-            {
-                // TODO: Add insert logic here
-
-                return RedirectToAction("Index");
+        public ActionResult Create(FormCollection collection) {
+            try {
+                UserDao userDao = new UserDao();
+                User user = new User();
+                user.Name = collection["Name"];
+                user.LastName = collection["LastName"];
+                user.Phone = collection["Phone"];
+                user.Email = collection["Email"];
+                Console.WriteLine(user.Name);
+                var result = userDao.Ingresar(user);
+                if (result) {
+                    return RedirectToAction("Index");
+                } else {
+                    return View();
+                }
             }
-            catch
-            {
+            catch (Exception e) {
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine(e.Message);
+                Console.ResetColor();
+                // return redirectToAction("Create");
                 return View();
             }
         }
@@ -76,8 +88,7 @@ namespace ProyecTenis.Controllers
         [HttpPost]
         public ActionResult Delete(int id, FormCollection collection)
         {
-            try
-            {
+            try {
                 // TODO: Add delete logic here
 
                 return RedirectToAction("Index");

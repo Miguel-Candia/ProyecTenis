@@ -20,7 +20,28 @@ namespace ProyecTenis.DAO
         }
         public Teacher BuscarById(int id)
         {
-            throw new NotImplementedException();
+            Teacher teacher = new Teacher();
+
+            if (con != null) {
+
+                SqlCommand cmdSql = new SqlCommand("Select * from teacher where id_teacher =" +id, con);
+                SqlDataReader resultTeacher = cmdSql.ExecuteReader();
+
+                if (resultTeacher.Read()) {
+                    teacher.Id = resultTeacher.GetInt32(0);
+                    teacher.Name = resultTeacher["name"].ToString();
+                    teacher.LastName = resultTeacher["last_name"].ToString();
+                    teacher.Rut = resultTeacher["rut"].ToString();
+                    teacher.UserName = resultTeacher["username"].ToString();
+                    teacher.Password = resultTeacher["password"].ToString();
+                }
+                resultTeacher.Close();
+
+            }
+
+            return teacher;
+
+           
         }
 
         public bool Conexion()
@@ -72,10 +93,31 @@ namespace ProyecTenis.DAO
 
         public List<Teacher> GetAll() {
 
-            List<Teacher> lista = new List<Teacher>();
-            lista.Add(new Teacher(1,"12345678-9","sadsd","asdasd","adsad","sdsaads"));
+            List<Teacher> listaTeacher = new List<Teacher>();
+            Teacher teacher;
 
-            return lista;
+            if (con != null)
+            {
+                SqlCommand cmdSql = new SqlCommand("Select * from teacher", con);
+                SqlDataReader resultTeacher = cmdSql.ExecuteReader();
+
+                while (resultTeacher.Read())
+                {
+
+                    teacher = new Teacher();
+                    teacher.Id = resultTeacher.GetInt32(0);
+                    teacher.Name = resultTeacher["name"].ToString();
+                    teacher.LastName = resultTeacher["last_name"].ToString();
+                    teacher.Rut = resultTeacher["rut"].ToString();
+                    teacher.UserName = resultTeacher["username"].ToString();
+                    teacher.Password = resultTeacher["password"].ToString();
+
+                    listaTeacher.Add(teacher);
+
+                }
+                resultTeacher.Close();
+            }
+            return listaTeacher;
         }
 
         public bool Ingresar(Teacher producto)

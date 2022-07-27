@@ -52,16 +52,6 @@ namespace ProyecTenis.DAO
                 SqlCommand cmdSql = new SqlCommand("Select * from User", con);
                 SqlCommand cmdEliminar = new SqlCommand("Delete from User where Id = " + id, con);
 
-                // SqlDataReader drProductos = cmdSql.ExecuteReader();
-
-                // while (drProductos.Read())
-                // {
-                //     Console.Write("Descripción " + drProductos.GetString(1));
-                //     Console.WriteLine("Precio " + drProductos["Precio"].ToString());
-                // }
-
-                // drProductos.Close();
-
                 cmdEliminar.ExecuteNonQuery();
 
             }
@@ -71,16 +61,52 @@ namespace ProyecTenis.DAO
         }
 
         public List<User> GetAll() {
-
             List<User> lista = new List<User>();
-            lista.Add(new User(1,"12345678-9","sadsd","asdasd","adsad","sdsaads"));
+            try {
 
+                if (con != null) {
+                    SqlCommand cmdSql = new SqlCommand("Select * from users", con);
+                    SqlDataReader reader = cmdSql.ExecuteReader();
+                    while (reader.Read()) {
+                        User u = new User();
+                        u.Id = reader.GetInt32(0);
+                        u.Name = reader.GetString(1);
+                        u.LastName = reader.GetString(2);   
+                        u.Rut = reader.GetString(3);
+                        u.Phone = reader.GetString(4);
+                        u.Email = reader.GetString(5);
+                        lista.Add(u);
+
+                    }
+                    reader.Close();
+                }
+
+            } catch(Exception e) {
+                Console.WriteLine(e.Message);
+            }
             return lista;
         }
 
-        public bool Ingresar(User producto)
-        {
-            throw new NotImplementedException();
+        public bool Ingresar(User user) {
+
+            try {
+                if(con != null) {
+                    SqlCommand cmdSql = new SqlCommand("INSERT INTO user (name, last_name, rut, phone, email) VALUES (@name, @last_name, @rut, @phone, @email)", con);
+                    cmdSql.Parameters.AddWithValue("@name", user.Name);
+                    cmdSql.Parameters.AddWithValue("@last_name", user.LastName);
+                    cmdSql.Parameters.AddWithValue("@rut", user.Rut);
+                    cmdSql.Parameters.AddWithValue("@phone", user.Phone);
+                    cmdSql.Parameters.AddWithValue("@email", user.Email);
+                    cmdSql.ExecuteNonQuery();
+                }
+
+            } catch (Exception e) {
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine(e.Message);
+                Console.ResetColor();
+                return false;
+            }
+            return true;
         }
 
         public bool Modificar(User producto)

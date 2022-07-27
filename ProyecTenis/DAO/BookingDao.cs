@@ -18,7 +18,7 @@ namespace ProyecTenis.DAO
         {
             Conexion();
         }
-        public Booking BuscarById(int id)
+        public Booking BuscarById(int idbooking)
         {
             throw new NotImplementedException();
         }
@@ -43,39 +43,51 @@ namespace ProyecTenis.DAO
             throw new NotImplementedException();
         }
 
-        public bool Eliminar(int id)
-        {
-            Console.WriteLine("Eliminando producto id" + id);
+        public bool Eliminar(int id) {
+            try{
+                Console.WriteLine("Eliminando booking(reserva) id" + id);
 
-            if (con != null)
-            {
-                SqlCommand cmdSql = new SqlCommand("Select * from Admin", con);
-                SqlCommand cmdEliminar = new SqlCommand("Delete from Admin where Id = " + id, con);
-
-                // SqlDataReader drProductos = cmdSql.ExecuteReader();
-
-                // while (drProductos.Read())
-                // {
-                //     Console.Write("Descripción " + drProductos.GetString(1));
-                //     Console.WriteLine("Precio " + drProductos["Precio"].ToString());
-                // }
-
-                // drProductos.Close();
-
-                cmdEliminar.ExecuteNonQuery();
-
+                if (con != null)
+                {
+                    SqlCommand cmdSql = new SqlCommand("Select * from booking", con);
+                    SqlCommand cmdEliminar = new SqlCommand("Delete from booking where id_booking = " + id, con);
+                    cmdEliminar.ExecuteNonQuery();
+                }
+                return true;
+            } catch(Exception e) {
+                Console.WriteLine(e.Message);
+                return false;
             }
-
-
-            return true;
         }
 
         public List<Booking> GetAll() {
 
-            List<Booking> lista = new List<Booking>();
-            lista.Add(new Booking(1,"12345678-9","sadsd","asdasd","adsad","sdsaads"));
+            List<Booking> listaBooking = new List<Booking>();
+            Booking booking;
 
-            return lista;
+            if (con != null)
+            {
+                SqlCommand cmdSql = new SqlCommand("Select * from booking ", con);
+                SqlDataReader resultBooking = cmdSql.ExecuteReader();
+
+                while (resultBooking.Read())
+                {
+
+                    booking = new Booking();
+                    booking.IdBooking = resultBooking.GetInt32(0);
+                    booking.IdCancha = resultBooking.GetInt32(1);
+                    booking.IdUser = resultBooking.GetInt32(2);
+                    booking.IdTeacher = resultBooking.GetInt32(3);
+                    booking.BookingDate = resultBooking["booking_date"].ToString();
+                    booking.BookingTime = resultBooking["booking_time"].ToString();
+
+                    listaBooking.Add(booking);
+
+                }
+                resultBooking.Close();
+            }
+            return listaBooking;
+
         }
 
         public bool Ingresar(Booking producto)

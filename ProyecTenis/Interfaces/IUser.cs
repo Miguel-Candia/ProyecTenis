@@ -7,7 +7,9 @@ using System.Web;
 
 namespace ProyecTenis.Interfaces
 {
-    interface IUser: ICRUD<User>
-    {
+    interface IUser: ICRUD<User> {
+        // add the funtionality to the interface
+        // User Insert(User user);
+
     }
 }

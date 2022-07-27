@@ -49,8 +49,8 @@ namespace ProyecTenis.DAO
 
             if (con != null)
             {
-                SqlCommand cmdSql = new SqlCommand("Select * from Admin", con);
-                SqlCommand cmdEliminar = new SqlCommand("Delete from Admin where Id = " + id, con);
+                SqlCommand cmdSql = new SqlCommand("Select * from administrador", con);
+                SqlCommand cmdEliminar = new SqlCommand("Delete from administrador where id_administrador = " + id, con);
 
                 // SqlDataReader drProductos = cmdSql.ExecuteReader();
 
@@ -72,10 +72,31 @@ namespace ProyecTenis.DAO
 
         public List<Admin> GetAll() {
 
-            List<Admin> lista = new List<Admin>();
-            lista.Add(new Admin(1,"12345678-9","sadsd","asdasd","adsad","sdsaads"));
+            List<Admin> listaAdmin = new List<Admin>();
+            Admin admin;
 
-            return lista;
+            if (con != null)
+            {
+                SqlCommand cmdSql = new SqlCommand("Select * from administrator", con);
+                SqlDataReader resultAdmin = cmdSql.ExecuteReader();
+
+                while(resultAdmin.Read()) 
+                {
+
+                    admin = new Admin();
+                    admin.Id = resultAdmin.GetInt32(0);
+                    admin.Name = resultAdmin["name"].ToString();
+                    admin.LastName = resultAdmin["last_name"].ToString();
+                    admin.Rut = resultAdmin["rut"].ToString();
+                    admin.UserName = resultAdmin["username"].ToString();
+                    admin.Password = resultAdmin["password"].ToString();
+
+                    listaAdmin.Add(admin);
+
+                }
+                resultAdmin.Close();
+            }
+            return listaAdmin;
         }
 
         public bool Ingresar(Admin producto)

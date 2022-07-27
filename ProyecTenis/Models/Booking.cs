@@ -7,22 +7,23 @@ namespace ProyecTenis.Models
 {
     public class Booking
     {
-        public int Id { get; set; }
-        public string Name { get; set; }
-        public string LastName { get; set; }
-        public string Rut { get; set; }
-        public string UserName { get; set; }
-        public string Password { get; set; }
+        public int IdBooking { get; set; }
+        public int IdCancha { get; set; }
+        public int IdUser { get; set; }
+        public int IdTeacher { get; set; }
+        public string BookingDate { get; set; }
+        public string BookingTime { get; set; }
 
-        public Booking(int id,string name, string lastname, string rut, string username, string password)
+        public Booking(int idBooking, int idCancha, int idUser, int idTeacher, string bookingDate, string bookingTime)
         {
-            Id = id;
-            Name = name;
-            LastName = lastname;
-            Rut = rut;
-            UserName = username;
-            Password = password;
+            IdBooking = idBooking;
+            IdCancha = idCancha;
+            IdUser = idUser;
+            IdTeacher = idTeacher;
+            BookingDate = bookingDate;
+            BookingTime = bookingTime;
         }
+
 
         public Booking() { }
 
